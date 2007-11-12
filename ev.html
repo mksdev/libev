@@ -6,7 +6,7 @@
 	<meta name="description" content="Pod documentation for libev" />
 	<meta name="inputfile" content="&lt;standard input&gt;" />
 	<meta name="outputfile" content="&lt;standard output&gt;" />
-	<meta name="created" content="Mon Nov 12 08:58:02 2007" />
+	<meta name="created" content="Mon Nov 12 09:02:48 2007" />
 	<meta name="generator" content="Pod::Xhtml 1.57" />
 <link rel="stylesheet" href="http://res.tst.eu/pod.css"/></head>
 <body>
@@ -89,7 +89,9 @@ will not have this argument.</p>
 </div>
 <h1 id="TIME_AND_OTHER_GLOBAL_FUNCTIONS">TIME AND OTHER GLOBAL FUNCTIONS</h1><p><a href="#TOP" class="toplink">Top</a></p>
 <div id="TIME_AND_OTHER_GLOBAL_FUNCTIONS_CONT">
-<p>Libev represents time as a single floating point number. This type is
+<p>Libev represents time as a single floating point number, representing the
+(fractional) number of seconds since the (POSIX) epoch (somewhere near
+the beginning of 1970, details are complicated, don't ask). This type is
 called <code>ev_tstamp</code>, which is what you should use too. It usually aliases
 to the double type in C.</p>
 <dl>
