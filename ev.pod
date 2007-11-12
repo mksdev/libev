@@ -120,7 +120,7 @@ If you don't know what event loop to use, use the one returned from this
 function.
 
 The flags argument can be used to specify special behaviour or specific
-backends to use, and is usually specified as 0 (or EVFLAG_AUTO)
+backends to use, and is usually specified as 0 (or EVFLAG_AUTO).
 
 It supports the following flags:
 
@@ -133,11 +133,12 @@ thing, believe me).
 
 =item EVFLAG_NOENV
 
-If this flag bit is ored into the flag value then libev will I<not> look
-at the environment variable C<LIBEV_FLAGS>. Otherwise (the default), this
-environment variable will override the flags completely. This is useful
-to try out specific backends to tets their performance, or to work around
-bugs.
+If this flag bit is ored into the flag value (or the program runs setuid
+or setgid) then libev will I<not> look at the environment variable
+C<LIBEV_FLAGS>. Otherwise (the default), this environment variable will
+override the flags completely if it is found in the environment. This is
+useful to try out specific backends to test their performance, or to work
+around bugs.
 
 =item EVMETHOD_SELECT  portable select backend
 
@@ -410,6 +411,20 @@ in each iteration of the event loop (This behaviour is called
 level-triggering because you keep receiving events as long as the
 condition persists. Remember you cna stop the watcher if you don't want to
 act on the event and neither want to receive future events).
+
+In general you can register as many read and/or write event watchers oer
+fd as you want (as long as you don't confuse yourself). Setting all file
+descriptors to non-blocking mode is also usually a good idea (but not
+required if you know what you are doing).
+
+You have to be careful with dup'ed file descriptors, though. Some backends
+(the linux epoll backend is a notable example) cannot handle dup'ed file
+descriptors correctly if you register interest in two or more fds pointing
+to the same file/socket etc. description.
+
+If you must do this, then force the use of a known-to-be-good backend
+(at the time of this writing, this includes only EVMETHOD_SELECT and
+EVMETHOD_POLL).
 
 =over 4
 
