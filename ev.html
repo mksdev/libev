@@ -6,7 +6,7 @@
 	<meta name="description" content="Pod documentation for libev" />
 	<meta name="inputfile" content="&lt;standard input&gt;" />
 	<meta name="outputfile" content="&lt;standard output&gt;" />
-	<meta name="created" content="Tue Nov 27 21:29:04 2007" />
+	<meta name="created" content="Tue Nov 27 21:38:05 2007" />
 	<meta name="generator" content="Pod::Xhtml 1.57" />
 <link rel="stylesheet" href="http://res.tst.eu/pod.css"/></head>
 <body>
@@ -743,7 +743,7 @@ is pending (but not active) you must not call an init function on it (but
 <code>ev_TYPE_set</code> is safe) and you must make sure the watcher is available to
 libev (e.g. you cnanot <code>free ()</code> it).</p>
 	</dd>
-	<dt>callback = ev_cb (ev_TYPE *watcher)</dt>
+	<dt>callback ev_cb (ev_TYPE *watcher)</dt>
 	<dd>
 		<p>Returns the callback currently set on the watcher.</p>
 	</dd>
@@ -785,12 +785,40 @@ can cast it back to your own type:</p>
   }
 
 </pre>
-<p>More interesting and less C-conformant ways of catsing your callback type
-have been omitted....</p>
+<p>More interesting and less C-conformant ways of casting your callback type
+instead have been omitted.</p>
+<p>Another common scenario is having some data structure with multiple
+watchers:</p>
+<pre>  struct my_biggy
+  {
+    int some_data;
+    ev_timer t1;
+    ev_timer t2;
+  }
+
+</pre>
+<p>In this case getting the pointer to <code>my_biggy</code> is a bit more complicated,
+you need to use <code>offsetof</code>:</p>
+<pre>  #include &lt;stddef.h&gt;
+
+  static void
+  t1_cb (EV_P_ struct ev_timer *w, int revents)
+  {
+    struct my_biggy big = (struct my_biggy *
+      (((char *)w) - offsetof (struct my_biggy, t1));
+  }
+
+  static void
+  t2_cb (EV_P_ struct ev_timer *w, int revents)
+  {
+    struct my_biggy big = (struct my_biggy *
+      (((char *)w) - offsetof (struct my_biggy, t2));
+  }
 
 
 
 
+</pre>
 
 </div>
 <h1 id="WATCHER_TYPES">WATCHER TYPES</h1>
