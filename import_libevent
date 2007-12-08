@@ -8,7 +8,6 @@ fi
 # this program combines libev and libevent into a single package
 
 cvs update -AdP
-rsync -avP libev/. . --exclude CVS
 
 LE=../libevent-1.4.0-beta
 
