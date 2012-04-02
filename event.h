@@ -75,6 +75,8 @@ struct event_base;
 #define EVLIST_INTERNAL 0x10
 #define EVLIST_INIT     0x80
 
+typedef void (*event_callback_fn)(int, short, void *);
+
 struct event
 {
   /* libev watchers we map onto */
@@ -86,7 +88,7 @@ struct event
 
   /* compatibility slots */
   struct event_base *ev_base;
-  void (*ev_callback)(int, short, void *arg);
+  event_callback_fn ev_callback;
   void *ev_arg;
   int ev_fd;
   int ev_pri;
@@ -94,6 +96,8 @@ struct event
   int ev_flags;
   short ev_events;
 };
+
+event_callback_fn event_get_callback (const struct event *ev);
 
 #define EV_READ                    EV_READ
 #define EV_WRITE                   EV_WRITE
@@ -140,9 +144,6 @@ int event_dispatch (void);
 #define _EVENT_LOG_ERR   3
 typedef void (*event_log_cb)(int severity, const char *msg);
 void event_set_log_callback(event_log_cb cb);
-
-typedef void (*event_callback_fn)(int, short, void *);
-event_callback_fn event_get_callback (const struct event *ev);
 
 void event_set (struct event *ev, int fd, short events, void (*cb)(int, short, void *), void *arg);
 int event_once (int fd, short events, void (*cb)(int, short, void *), void *arg, struct timeval *tv);
