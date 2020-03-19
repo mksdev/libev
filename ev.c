@@ -3167,7 +3167,7 @@ ev_recommended_backends (void) EV_NOEXCEPT
 #if !EV_RECOMMEND_LINUXAIO
   flags &= ~EVBACKEND_LINUXAIO;
 #endif
-  /* TODO: linuxaio is super experimental */
+  /* TODO: iouring is super experimental */
 #if !EV_RECOMMEND_IOURING
   flags &= ~EVBACKEND_IOURING;
 #endif
